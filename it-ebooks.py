@@ -74,15 +74,17 @@ def down_book(down_url,url,book_name,local_dir):
     elif os.path.exists(down_dir_tmp) == True or os.path.exists(down_dir) == False:
         if os.path.exists(down_dir_tmp) == True:
             print "....ReDownloading <"+book_name+">:"+size+"...."
+            print "Original Size: "+round(float(size.replace(' MB',"")),1)
             os.remove(down_dir_tmp)
         else:
             print "....Downloading <"+book_name+">:"+size+"...."
+            print "Original Size: "+round(float(size.replace(' MB',"")),1)
         rp = requests.get(down_url,headers = {'Referer':url},allow_redirects = False)
         r = requests.get(rp.headers['location'])
         with open(down_dir_tmp, "wb") as code:
            code.write(r.content)
-        print round(float(size.replace(' MB',"")),1)
-        print round(float(getsize(down_dir_tmp))/1024/1024,1)
+
+        print "Actual Size: "+round(float(getsize(down_dir_tmp))/1024/1024,1)
         if abs(round(float(getsize(down_dir_tmp))/1024/1024,1) 
             - round(float(size.replace(' MB',"")),1))/round(float(size.replace(' MB',"")),1) < 0.3:#此处可调整，如果下载不到原有的70%认为没下载成功
             os.rename(down_dir_tmp,down_dir)
@@ -116,6 +118,6 @@ while Done < 10:
             else:
                 Done = Done + 1
     i = i + 1
-    print Done
+    #print Done
 
 
