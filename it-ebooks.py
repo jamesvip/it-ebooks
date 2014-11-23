@@ -72,22 +72,22 @@ def down_book(down_url,url,book_name,local_dir):
     if os.path.exists(down_dir) == True and abs(round(float(getsize(down_dir))/1024/1024,1) - round(float(size.replace(' MB',"")),1)) < 1: #判断书籍是否被下载过，如已存在文件则跳过
         #sys.exit()
 
-        print ("....<"+book_name+"> already exists....")
+        print ("....<"+book_name+"> already exists...")
         logging.info("....Books already exists....")
     elif os.path.exists(down_dir_tmp) == True or os.path.exists(down_dir) == False:
         if os.path.exists(down_dir_tmp) == True:
-            print "....ReDownloading <"+book_name+">:"+size+"...."
-            print "Original Size: "+round(float(size.replace(' MB',"")),1)
+            print "...ReDownloading <"+book_name+">..."
+            print "Original Size: "+size
             os.remove(down_dir_tmp)
         else:
-            print "....Downloading <"+book_name+">:"+size+"...."
-            print "Original Size: "+round(float(size.replace(' MB',"")),1)
+            print "...Downloading <"+book_name+">..."
+            print "Original Size: "+size
         rp = requests.get(down_url,headers = {'Referer':url},allow_redirects = False)
         r = requests.get(rp.headers['location'])
         with open(down_dir_tmp, "wb") as code:
            code.write(r.content)
 
-        print "Actual Size: "+round(float(getsize(down_dir_tmp))/1024/1024,1)
+        print "Actual Size: "+str(round(float(getsize(down_dir_tmp))/1024/1024,1))+" MB"
         if abs(round(float(getsize(down_dir_tmp))/1024/1024,1) 
             - round(float(size.replace(' MB',"")),1))/round(float(size.replace(' MB',"")),1) < 0.3:#此处可调整，如果下载不到原有的70%认为没下载成功
             os.rename(down_dir_tmp,down_dir)
