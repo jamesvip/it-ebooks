@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 print u"下载书籍关键字：", sys.argv[1]
 query = sys.argv[1]
 
-local_dir = "E:\\Book\\"+query+"\\"
+local_dir = "D:\\Book\\"+query+"\\"
 
 if not os.path.exists(local_dir):
     os.makedirs(local_dir)
