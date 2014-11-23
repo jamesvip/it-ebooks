@@ -17,6 +17,9 @@ from bs4 import BeautifulSoup
 query = "JavaScript"
 local_dir = "E:\\Book\\"+query+"\\"
 
+if not os.path.exists(local_dir):
+    os.makedirs(local_dir)
+
 def remote_down_url(remote_url):
     """
     寻找下载书籍链接函数和书籍大小函数
