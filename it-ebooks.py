@@ -14,7 +14,10 @@ from bs4 import BeautifulSoup
 在query处填需要的书类别，注意大小写
 在local_dir处填写本地下载路径
 """
-query = "Oracle"
+
+print u"下载书籍关键字：", sys.argv[1]
+query = sys.argv[1]
+
 local_dir = "E:\\Book\\"+query+"\\"
 
 if not os.path.exists(local_dir):
