@@ -113,7 +113,7 @@ while Done < 10:
         if re.search(regex_book_link,str(link)) != None and link.text != '':
             book_name = link.text
             preurl = 'http://it-ebooks.info'+link['href']
-            if query in book_name:
+            if query.lower() in book_name.lower():
                 Done = 0
                 remote_down_url(preurl)
                 # print down_url
@@ -122,5 +122,3 @@ while Done < 10:
                 Done = Done + 1
     i = i + 1
     #print Done
-
-
